@@ -293,6 +293,35 @@
             font-weight: 400;
             color: #92400e;
         }
+        /* ── Event column — Break-style but green ── */
+        #tableWrap .col-event {
+            width: 36px;
+            min-width: 32px;
+            max-width: 44px;
+            background: #dcfce7 !important;
+            color: #166534;
+            font-weight: 700;
+            font-size: 9px;
+            text-align: center;
+            vertical-align: middle;
+            border-left: 2px solid #4ade80 !important;
+            border-right: 2px solid #4ade80 !important;
+            padding: 4px 2px;
+        }
+        #tableWrap th.col-event {
+            writing-mode: vertical-rl;
+            text-orientation: mixed;
+        }
+        #tableWrap th.col-event .period-time {
+            display: block;
+            font-size: 7px;
+            font-weight: 400;
+            color: #166534;
+        }
+        #tableWrap td.col-event.period-group-sep,
+        #tableWrap th.col-event.period-group-sep {
+            border-left: 2.5px solid #94a3b8 !important;
+        }
         #tableWrap .col-period .cell-content {
             font-size: 8px;
             line-height: 1.15;
@@ -340,6 +369,14 @@
             background: #93c5fd !important;
             box-shadow: inset 0 0 0 1.5px #2563eb !important;
         }
+        #tableWrap .col-period .cell-content.subst-marked {
+            background: #bfdbfe !important;
+            box-shadow: inset 0 0 0 1.5px #1d4ed8 !important;
+        }
+        #tableWrap .col-period .cell-content.subst-marked .subj,
+        #tableWrap .col-period .cell-content.subst-marked .tchr {
+            color: #1e3a8a;
+        }
         #tableWrap .col-period .cell-content.filtered-match {
             background: #fef08a !important;
             box-shadow: inset 0 0 0 1.5px #eab308 !important;
@@ -355,6 +392,25 @@
             right: -2px;
             font-size: 8px;
             color: #dc2626;
+        }
+        /* Event-blocked cells look like Break (green), not conflict */
+        #tableWrap .col-period .cell-content.event-cell {
+            background: #dcfce7 !important;
+            box-shadow: inset 0 0 0 1px #4ade80 !important;
+        }
+        #tableWrap .col-period .cell-content.event-cell .subj {
+            color: #166534 !important;
+            font-weight: 700;
+        }
+        #tableWrap .col-period .cell-content.event-cell .tchr {
+            color: #16a34a !important;
+        }
+        #tableWrap .col-period .cell-content.event-cell.conflict {
+            background: #dcfce7 !important;
+            box-shadow: inset 0 0 0 1px #4ade80 !important;
+        }
+        #tableWrap .col-period .cell-content.event-cell.conflict::after {
+            display: none;
         }
 
         /* period group separator */
@@ -576,6 +632,130 @@
             max-height: 85vh;
             overflow: auto;
             box-shadow: 0 20px 60px rgba(0, 0, 0, 0.2);
+        }
+        #modalOverlay .modal.modal-lg {
+            max-width: 980px;
+        }
+
+        /* ── SUBST module ── */
+        .subst-wrap {
+            position: relative;
+            display: inline-block;
+        }
+        .subst-menu {
+            display: none;
+            position: absolute;
+            top: 100%;
+            left: 0;
+            margin-top: 4px;
+            background: #ffffff;
+            border: 1px solid #e2e8f0;
+            border-radius: 8px;
+            box-shadow: 0 10px 28px rgba(15, 23, 42, 0.18);
+            z-index: 60;
+            min-width: 170px;
+            overflow: hidden;
+        }
+        .subst-menu.open {
+            display: block;
+        }
+        .subst-menu button {
+            display: block;
+            width: 100%;
+            text-align: left;
+            padding: 9px 13px;
+            border: none;
+            background: none;
+            font-size: 11.5px;
+            cursor: pointer;
+            color: #334155;
+        }
+        .subst-menu button:hover {
+            background: #f1f5f9;
+        }
+        #modalOverlay .modal label.subst-check-item {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            font-size: 11px;
+            font-weight: 400;
+            color: #334155;
+            margin: 0;
+            padding: 3px 6px;
+            border-radius: 4px;
+            cursor: pointer;
+            width: 100%;
+            box-sizing: border-box;
+        }
+        #modalOverlay .modal label.subst-check-item input[type="checkbox"] {
+            width: auto;
+            flex-shrink: 0;
+            margin: 0;
+            cursor: pointer;
+        }
+        #modalOverlay .modal label.subst-check-item span {
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+        }
+        .subst-check-item:hover {
+            background: #eef2ff;
+        }
+        .subst-teacher-list {
+            max-height: 160px;
+            overflow-y: auto;
+            border: 1px solid #e2e8f0;
+            border-radius: 6px;
+            padding: 4px 6px;
+            background: #f8fafc;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 0 8px;
+        }
+        .subst-table-wrap {
+            max-height: 220px;
+            overflow: auto;
+            border: 1px solid #e2e8f0;
+            border-radius: 6px;
+        }
+        table.subst-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 10.5px;
+        }
+        table.subst-table th, table.subst-table td {
+            border: 1px solid #e2e8f0;
+            padding: 4px 6px;
+            text-align: center;
+        }
+        table.subst-table th {
+            background: #f1f5f9;
+            position: sticky;
+            top: 0;
+            z-index: 1;
+        }
+        table.subst-table select {
+            font-size: 10px;
+            padding: 1px 2px;
+        }
+        table.subst-preview td.subst-cell {
+            font-size: 9px;
+            line-height: 1.3;
+        }
+        table.subst-preview td.subst-changed {
+            background: #fef3c7;
+            color: #92400e;
+        }
+        table.subst-preview td.subst-warn {
+            background: #fee2e2;
+            color: #991b1b;
+        }
+        table.subst-preview td.subst-empty {
+            color: #cbd5e1;
+        }
+        .subst-cell .strike {
+            text-decoration: line-through;
+            opacity: 0.75;
         }
         #modalOverlay .modal h3 {
             font-size: 14px;
@@ -1026,6 +1206,23 @@
         .edit-form .btn-row .btn-danger:hover {
             background: #b91c1c;
         }
+        /* Undo / Redo buttons */
+        #btnUndo, #btnRedo {
+            background: #f1f5f9;
+            color: #334155;
+            border: 1.5px solid #cbd5e1;
+            border-radius: 6px;
+            font-weight: 600;
+            transition: background 0.15s, opacity 0.15s;
+            cursor: pointer;
+        }
+        #btnUndo:hover:not(:disabled), #btnRedo:hover:not(:disabled) {
+            background: #e2e8f0;
+        }
+        #btnUndo:disabled, #btnRedo:disabled {
+            opacity: 0.38;
+            cursor: not-allowed;
+        }
     </style>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.8.2/jspdf.plugin.autotable.min.js"></script>
@@ -1061,10 +1258,21 @@
             <div class="sep"></div>
             <button id="btnClearAll" class="danger">🗑️ Clear Data</button>
             <div class="sep"></div>
+            <button id="btnUndo" title="Undo (Ctrl+Z)" disabled style="font-size:13px;padding:4px 10px;">&#8592; Undo</button>
+            <button id="btnRedo" title="Redo (Ctrl+Shift+Z)" disabled style="font-size:13px;padding:4px 10px;">Redo &#8594;</button>
+            <div class="sep"></div>
             <label>Periods/day: <input type="number" id="periodsPerDay" value="7" min="4" max="10" /></label>
             <label>Apply all days: <input type="checkbox" id="applyAllDays" /></label>
             <div class="sep"></div>
             <button id="btnMultipleDays" class="primary" onclick="handleMultipleDaysBtnClick()">📅 Multiple Days</button>
+            <div class="subst-wrap">
+                <button id="btnSubst" class="primary" onclick="toggleSubstMenu(event)">🔁 SUBST ▾</button>
+                <div id="substMenu" class="subst-menu">
+                    <button onclick="closeSubstMenu(); openTeacherSubModal();">🧑‍🏫 Teacher Sub</button>
+                    <button onclick="closeSubstMenu(); openClassExchangeModal();">🔄 Class Sub</button>
+                    <button onclick="closeSubstMenu(); openEventModal();">📌 Event</button>
+                </div>
+            </div>
         </div>
 
         <!-- SELECTION BANNER -->
@@ -1141,6 +1349,7 @@
             subjects: {}, // code -> { name, minimalCode }
             teachers: {}, // id -> { name, minimalId, subjects: [...] }
             timetable: {}, // "I-A" -> day -> period -> { subject, teacher }
+            substitutedCells: {}, // "classKey|day|period" -> true, marks cells changed via SUBST module (shown in blue)
             settings: {
                 periodsPerDay: 7,
                 periodTimes: {},
@@ -1216,15 +1425,25 @@
         }
 
         function setCellValue(classKey, day, period, subject, teacher) {
+            pushHistory(); // no-op if inside a beginTransaction batch
             if (!appData.timetable[classKey]) appData.timetable[classKey] = {};
             if (!appData.timetable[classKey][day]) appData.timetable[classKey][day] = {};
             appData.timetable[classKey][day][period] = { subject: subject || null, teacher: teacher || null };
         }
 
         function clearCell(classKey, day, period) {
+            pushHistory(); // no-op if inside a beginTransaction batch
             if (appData.timetable[classKey] && appData.timetable[classKey][day]) {
                 appData.timetable[classKey][day][period] = { subject: null, teacher: null };
             }
+        }
+
+        function markSubstituted(classKey, day, period) {
+            appData.substitutedCells[classKey + '|' + day + '|' + period] = true;
+        }
+
+        function isSubstituted(classKey, day, period) {
+            return !!appData.substitutedCells[classKey + '|' + day + '|' + period];
         }
 
         function getPeriodDisplay(p) {
@@ -1399,6 +1618,7 @@
                     appData.subjects = parsed.subjects || {};
                     appData.teachers = parsed.teachers || {};
                     appData.timetable = parsed.timetable || {};
+                    appData.substitutedCells = parsed.substitutedCells || {};
                     appData.settings = parsed.settings || { periodsPerDay: 7, periodTimes: {}, breaks: [] };
                     if (!appData.settings.periodTimes || Object.keys(appData.settings.periodTimes).length === 0) {
                         appData.settings.periodTimes = initDefaultTimes();
@@ -1440,6 +1660,7 @@
             appData.subjects = {};
             appData.teachers = {};
             appData.timetable = {};
+            appData.substitutedCells = {};
             appData.settings.periodsPerDay = 7;
             appData.settings.periodTimes = initDefaultTimes();
             appData.settings.breaks = [];
@@ -1466,6 +1687,118 @@
             return times;
         }
 
+        // ───────────── UNDO / REDO ─────────────
+        const MAX_HISTORY = 60;
+        let undoStack = [];
+        let redoStack = [];
+        let _inHistoryBatch = false; // true while a batch transaction owns the push
+
+        function _snapshotAppData() {
+            return JSON.stringify({
+                timetable: appData.timetable,
+                subjects: appData.subjects,
+                teachers: appData.teachers,
+                classes: appData.classes,
+                classTeachers: appData.classTeachers,
+                substitutedCells: appData.substitutedCells
+            });
+        }
+
+        function pushHistory() {
+            if (_inHistoryBatch) return; // batch operation owns the push; skip
+            undoStack.push(_snapshotAppData());
+            if (undoStack.length > MAX_HISTORY) undoStack.shift();
+            redoStack = [];
+            _updateUndoUI();
+        }
+
+        // Call before a batch of setCellValue/clearCell calls to push ONE snapshot
+        function beginTransaction() {
+            if (!_inHistoryBatch) {
+                undoStack.push(_snapshotAppData());
+                if (undoStack.length > MAX_HISTORY) undoStack.shift();
+                redoStack = [];
+                _inHistoryBatch = true;
+                _updateUndoUI();
+            }
+        }
+        function endTransaction() { _inHistoryBatch = false; }
+
+        function undo() {
+            if (undoStack.length === 0) { showToast('Nothing to undo', 'error'); return; }
+            redoStack.push(_snapshotAppData());
+            const prev = JSON.parse(undoStack.pop());
+            Object.assign(appData, prev);
+            _inHistoryBatch = false;
+            render();
+            saveData();
+            showToast('↩ Undo');
+            _updateUndoUI();
+        }
+
+        function redo() {
+            if (redoStack.length === 0) { showToast('Nothing to redo', 'error'); return; }
+            undoStack.push(_snapshotAppData());
+            const next = JSON.parse(redoStack.pop());
+            Object.assign(appData, next);
+            _inHistoryBatch = false;
+            render();
+            saveData();
+            showToast('↪ Redo');
+            _updateUndoUI();
+        }
+
+        function _updateUndoUI() {
+            const u = document.getElementById('btnUndo');
+            const r = document.getElementById('btnRedo');
+            if (u) u.disabled = undoStack.length === 0;
+            if (r) r.disabled = redoStack.length === 0;
+            if (u) u.title = undoStack.length > 0 ? `Undo (${undoStack.length} step${undoStack.length > 1 ? 's' : ''}) — Ctrl+Z` : 'Nothing to undo';
+            if (r) r.title = redoStack.length > 0 ? `Redo (${redoStack.length} step${redoStack.length > 1 ? 's' : ''}) — Ctrl+Shift+Z` : 'Nothing to redo';
+        }
+
+        // ───────────── PERIOD LAYOUT (event columns) ─────────────
+        // Returns { normalDays: ['Monday',...], eventGroups: [{name, days},...] }
+        // for a given period key. Days where ALL classes have teacher=EVENT become
+        // event-group columns (rendered like Break), not individual day cells.
+        function getPeriodLayout(periodKey) {
+            const classKeys = getClassKeys();
+            if (classKeys.length === 0) {
+                return { normalDays: [...DAYS], eventGroups: [] };
+            }
+            const dayEventName = {};
+            DAYS.forEach(d => {
+                let allEvent = true;
+                let eName = null;
+                classKeys.forEach(ck => {
+                    const v = getCellValue(ck, d, periodKey);
+                    if (v.teacher === 'EVENT' && v.subject) {
+                        if (!eName) eName = getSubjectName(v.subject);
+                    } else {
+                        allEvent = false;
+                    }
+                });
+                dayEventName[d] = allEvent ? eName : null;
+            });
+            const normalDays = DAYS.filter(d => !dayEventName[d]);
+            const eventGroups = [];
+            let i = 0;
+            while (i < DAYS.length) {
+                const d = DAYS[i];
+                if (dayEventName[d]) {
+                    const grpDays = [d];
+                    const grpName = dayEventName[d];
+                    let j = i + 1;
+                    while (j < DAYS.length && dayEventName[DAYS[j]]) {
+                        grpDays.push(DAYS[j]); j++;
+                    }
+                    eventGroups.push({ name: grpName, days: grpDays });
+                    i = j;
+                } else { i++; }
+            }
+            return { normalDays, eventGroups };
+        }
+
         // ───────────── RENDER ─────────────
         function render() {
             const pCount = getPeriodsPerDay();
@@ -1473,16 +1806,33 @@
             const classList = getClassList();
             const conflicts = findConflicts();
 
+            // Pre-compute which days are event columns vs normal for each period
+            const periodLayouts = {};
+            periodKeys.forEach(p => { periodLayouts[p] = getPeriodLayout(p); });
+
             const thead = document.getElementById('tableHead');
             let headerHtml = '<tr>';
             headerHtml += '<th class="col-class" rowspan="2">Class</th>';
             headerHtml += '<th class="col-section" rowspan="2">Sec</th>';
             headerHtml += '<th class="col-teacher" rowspan="2">Teacher</th>';
 
+            // Header row 1: period headers (spanning only normal-day sub-cols) + event columns (rowspan=2) + breaks (rowspan=2)
             periodKeys.forEach((p, pi) => {
                 const timeStr = getPeriodDisplay(p);
-                const cls = pi === 0 ? 'col-period' : 'col-period period-group-sep';
-                headerHtml += `<th class="${cls}" colspan="5">${p}${timeStr ? '<span class="period-time">'+timeStr+'</span>' : ''}</th>`;
+                const { normalDays, eventGroups } = periodLayouts[p];
+                const normalCount = normalDays.length;
+                const isFirst = pi === 0;
+                let firstAdded = false;
+                if (normalCount > 0) {
+                    const sepCls = !isFirst ? ' period-group-sep' : '';
+                    headerHtml += `<th class="col-period${sepCls}" colspan="${normalCount}">${p}${timeStr ? '<span class="period-time">'+timeStr+'</span>' : ''}</th>`;
+                    firstAdded = true;
+                }
+                eventGroups.forEach(evGrp => {
+                    const sepCls = (!isFirst && !firstAdded) ? ' period-group-sep' : '';
+                    headerHtml += `<th class="col-event${sepCls}" rowspan="2">${evGrp.name}</th>`;
+                    firstAdded = true;
+                });
                 const pNum = parseInt(p.replace('P', ''), 10);
                 getBreaksAfterPeriod(pNum).forEach(b => {
                     headerHtml += `<th class="col-break" rowspan="2">${b.name}${b.start ? '<span class="period-time">'+b.start+'–'+b.end+'</span>' : ''}</th>`;
@@ -1490,12 +1840,12 @@
             });
             headerHtml += '</tr><tr>';
 
+            // Header row 2: only normal-day letters (event-group columns already occupy row 2 via rowspan=2)
             periodKeys.forEach((p, pi) => {
-                const groupSep = pi !== 0;
-                const days = ['M', 'T', 'W', 'Th', 'F'];
-                days.forEach((label, di) => {
-                    const cls = di === 0 && groupSep ? 'col-period period-group-sep' : 'col-period';
-                    headerHtml += `<th class="${cls}">${label}</th>`;
+                const { normalDays } = periodLayouts[p];
+                normalDays.forEach((d, di) => {
+                    const sepCls = (pi !== 0 && di === 0) ? ' period-group-sep' : '';
+                    headerHtml += `<th class="col-period${sepCls}">${DAY_SHORT[d]}</th>`;
                 });
             });
             headerHtml += '</tr>';
@@ -1532,36 +1882,49 @@
                     `<td class="col-teacher" data-key="${key}" title="${teacherName}" style="cursor:pointer;">${teacherMin}</td>`;
 
                 periodKeys.forEach((p, pi) => {
-                    DAYS.forEach((d, di) => {
-                        const clsTd = (pi !== 0 && di === 0) ? 'col-period period-group-sep' : 'col-period';
+                    const { normalDays, eventGroups } = periodLayouts[p];
+                    let firstCell = true;
+
+                    // Normal day cells
+                    normalDays.forEach((d, di) => {
+                        const needsSep = pi !== 0 && firstCell;
+                        const clsTd = needsSep ? 'col-period period-group-sep' : 'col-period';
+                        firstCell = false;
                         const val = getCellValue(key, d, p);
                         const subj = val.subject;
                         const tchr = val.teacher;
                         const subjMin = getSubjectMinimal(subj);
                         const tchrMin = getTeacherMinimal(tchr);
                         const filled = !!(subj && tchr);
-                        const conflict = isConflict(key, d, p);
+                        const isEvtCell = tchr === 'EVENT';
+                        const conflict = !isEvtCell && isConflict(key, d, p);
                         const selected = isCellSelected(key, d, p);
-
+                        const substMarked = isSubstituted(key, d, p);
                         let filterClass = '';
                         if (activeTeacherFilter) {
-                            if (tchr === activeTeacherFilter) {
-                                filterClass = ' filtered-match';
-                            } else {
-                                filterClass = ' filtered-dim';
-                            }
+                            if (tchr === activeTeacherFilter) filterClass = ' filtered-match';
+                            else filterClass = ' filtered-dim';
                         }
-
-                        const contentClass = 'cell-content' + (filled ? ' filled' : ' empty') + (conflict ?
-                            ' conflict' : '') + (selected ? ' selected-cell' : '') + filterClass;
-                        const titleText = filled ? `${subj} / ${getSubjectName(subj)} — ${tchr} / ${getTeacherName(tchr)}` :
-                            'empty';
+                        const contentClass = 'cell-content' + (filled ? ' filled' : ' empty') +
+                            (isEvtCell ? ' event-cell' : (conflict ? ' conflict' : '')) +
+                            (selected ? ' selected-cell' : '') + (substMarked ? ' subst-marked' : '') + filterClass;
+                        const titleText = filled ? `${subj} / ${getSubjectName(subj)} — ${tchr} / ${getTeacherName(tchr)}${substMarked ? ' (substituted)' : ''}` : 'empty';
                         bodyHtml += `<td class="${clsTd}" data-key="${key}" data-day="${d}" data-period="${p}">
                                     <div class="${contentClass}" title="${titleText}">
                                         ${filled ? `<span class="subj">${subjMin}</span><span class="tchr">${tchrMin}</span>` : '<span style="color:#cbd5e1;font-size:11px;">·</span>'}
                                     </div>
                                 </td>`;
                     });
+
+                    // Event-group columns (like Break — one merged column per group)
+                    eventGroups.forEach(evGrp => {
+                        const needsSep = pi !== 0 && firstCell;
+                        const clsTd = needsSep ? 'col-event period-group-sep' : 'col-event';
+                        firstCell = false;
+                        bodyHtml += `<td class="${clsTd}">${evGrp.name}</td>`;
+                    });
+
+                    // Break columns
                     const pNum = parseInt(p.replace('P', ''), 10);
                     getBreaksAfterPeriod(pNum).forEach(b => {
                         bodyHtml += `<td class="col-break">${b.name}</td>`;
@@ -2122,9 +2485,11 @@
         }
 
         // ───────────── MODAL HELPERS ─────────────
-        function openModal(html) {
+        function openModal(html, extraClass) {
             const overlay = document.getElementById('modalOverlay');
-            document.getElementById('modalContent').innerHTML = html;
+            const content = document.getElementById('modalContent');
+            content.className = 'modal' + (extraClass ? ' ' + extraClass : '');
+            content.innerHTML = html;
             overlay.classList.add('open');
         }
 
@@ -2161,6 +2526,18 @@
                             const sec = row[1];
                             if (!classExists(cls, sec)) {
                                 if (addClass(cls, sec)) count++;
+                            }
+                            const classTeacherId = row[2] ? row[2].trim().toUpperCase() : '';
+                            if (classTeacherId) {
+                                const key = getClassKey(cls, sec);
+                                if (!appData.teachers[classTeacherId]) {
+                                    appData.teachers[classTeacherId] = {
+                                        name: classTeacherId,
+                                        minimalId: classTeacherId.slice(0, 2),
+                                        subjects: []
+                                    };
+                                }
+                                setClassTeacher(key, classTeacherId);
                             }
                         }
                     });
@@ -2227,7 +2604,9 @@
                         showToast('Invalid timetable CSV header', 'error');
                     } else {
                         let importedRows = 0;
-                        const periodsInFile = headers.slice(2).map(h => h.trim()).filter(h => /^P\d+$/.test(h));
+                        const hasTeacherCol = headers[2] && headers[2].trim().toUpperCase() === 'CLASSTEACHERID';
+                        const periodStartIdx = hasTeacherCol ? 3 : 2;
+                        const periodsInFile = headers.slice(periodStartIdx).map(h => h.trim()).filter(h => /^P\d+$/.test(h));
                         if (periodsInFile.length > 0) {
                             const targetPeriods = Math.min(Math.max(periodsInFile.length, 4), 10);
                             if (targetPeriods !== getPeriodsPerDay()) {
@@ -2247,7 +2626,7 @@
                             }
                         }
                         data.forEach(row => {
-                            if (row.length < 3) return;
+                            if (row.length < periodStartIdx + 1) return;
                             const classSection = row[0].trim();
                             const day = row[1].trim();
                             if (!classSection || !day) return;
@@ -2263,7 +2642,20 @@
                             if (!appData.timetable[key]) {
                                 addClass(cls, sec);
                             }
-                            row.slice(2).forEach((cell, index) => {
+                            if (hasTeacherCol) {
+                                const classTeacherId = row[2] ? row[2].trim().toUpperCase() : '';
+                                if (classTeacherId) {
+                                    if (!appData.teachers[classTeacherId]) {
+                                        appData.teachers[classTeacherId] = {
+                                            name: classTeacherId,
+                                            minimalId: classTeacherId.slice(0, 2),
+                                            subjects: []
+                                        };
+                                    }
+                                    setClassTeacher(key, classTeacherId);
+                                }
+                            }
+                            row.slice(periodStartIdx).forEach((cell, index) => {
                                 const periodKey = 'P' + (index + 1);
                                 if (!cell || !cell.trim()) {
                                     clearCell(key, day, periodKey);
@@ -2306,30 +2698,24 @@
             const periodKeys = [];
             for (let p = 1; p <= pCount; p++) periodKeys.push('P' + p);
             const rows = [];
-            rows.push(['Class-Section', 'Day', ...periodKeys].join(','));
-            getClassKeys().forEach(c => {
+            getClassList().forEach(c => {
+                const key = getClassKey(c.class, c.section);
+                const classTeacherId = getClassTeacher(key) || '';
                 DAYS.forEach(d => {
-                    const row = [c, d];
+                    const row = [key, d, classTeacherId];
                     periodKeys.forEach(p => {
-                        const val = getCellValue(c, d, p);
+                        const val = getCellValue(key, d, p);
                         if (val.subject && val.teacher) {
                             const tName = getTeacherName(val.teacher);
-                            const sCode = val.subject;
-                            row.push(val.teacher + ':' + tName + ':' + sCode);
+                            row.push(val.teacher + ':' + tName + ':' + val.subject);
                         } else {
                             row.push('');
                         }
                     });
-                    rows.push(row.join(','));
+                    rows.push(row);
                 });
             });
-            const blob = new Blob([rows.join('\n')], { type: 'text/csv' });
-            const url = URL.createObjectURL(blob);
-            const a = document.createElement('a');
-            a.href = url;
-            a.download = 'timetable_export.csv';
-            a.click();
-            URL.revokeObjectURL(url);
+            downloadCSV('timetable_export.csv', ['Class-Section', 'Day', 'ClassTeacherID', ...periodKeys], rows);
             showToast('Exported successfully');
         }
 
@@ -2341,9 +2727,8 @@
             return s;
         }
 
-        function downloadCSV(filename, headerArr, rows) {
-            const lines = [headerArr.map(csvField).join(',')];
-            rows.forEach(r => lines.push(r.map(csvField).join(',')));
+        function downloadCSVRaw(filename, lineArrays) {
+            const lines = lineArrays.map(r => r.map(csvField).join(','));
             const blob = new Blob([lines.join('\n')], { type: 'text/csv' });
             const url = URL.createObjectURL(blob);
             const a = document.createElement('a');
@@ -2351,6 +2736,10 @@
             a.download = filename;
             a.click();
             URL.revokeObjectURL(url);
+        }
+
+        function downloadCSV(filename, headerArr, rows) {
+            downloadCSVRaw(filename, [headerArr, ...rows]);
         }
 
         function exportClassesCSV() {
@@ -3227,8 +3616,12 @@
         document.getElementById('btnClearAll').addEventListener('click', function() {
             if (!confirm('⚠️ Clear ALL data (classes, subjects, teachers, timetable) from local storage?')) return;
             if (!confirm('This cannot be undone. Are you sure?')) return;
+            undoStack = []; redoStack = []; _updateUndoUI();
             clearAllData();
         });
+
+        document.getElementById('btnUndo').addEventListener('click', undo);
+        document.getElementById('btnRedo').addEventListener('click', redo);
 
         // ───────────── INIT ─────────────
         function init() {
@@ -3256,7 +3649,664 @@
                 document.getElementById('contextMenu').style.display = 'none';
                 stopEditing();
             }
+            // Ctrl+Z = Undo,  Ctrl+Shift+Z = Redo
+            if ((e.ctrlKey || e.metaKey) && e.key === 'z' && !e.shiftKey) {
+                e.preventDefault();
+                undo();
+            }
+            if ((e.ctrlKey || e.metaKey) && (e.key === 'y' || (e.key === 'z' && e.shiftKey))) {
+                e.preventDefault();
+                redo();
+            }
         });
+
+        // ═══════════════════════════════════════════════════════════════
+        // SUBSTITUTION & SCHEDULE MODIFICATIONS MODULE
+        // Isolated state — reads the existing timetable schema via
+        // getCellValue/setCellValue/getClassKeys/getAllPeriodKeys, but
+        // keeps its own working state so it never silently touches
+        // appData except where explicitly documented below:
+        //   • Teacher Sub   -> DRAFT ONLY. Nothing is written to
+        //                      appData.timetable. Only "Export" produces
+        //                      a CSV substitution memo.
+        //   • Class Sub     -> APPLIES IMMEDIATELY to appData.timetable
+        //                      (Exchange/Borrow are real schedule edits),
+        //                      then can also be exported as a CSV log.
+        //   • Event         -> APPLIES IMMEDIATELY to appData.timetable
+        //                      (blocks/overrides the chosen slots).
+        // ═══════════════════════════════════════════════════════════════
+
+        function toggleSubstMenu(e) {
+            e.stopPropagation();
+            document.getElementById('substMenu').classList.toggle('open');
+        }
+        function closeSubstMenu() {
+            document.getElementById('substMenu').classList.remove('open');
+        }
+        document.addEventListener('click', function(e) {
+            const menu = document.getElementById('substMenu');
+            if (menu && menu.classList.contains('open') && !menu.contains(e.target) && e.target.id !== 'btnSubst') {
+                menu.classList.remove('open');
+            }
+        });
+
+        // ── Shared helpers ──
+        function substGetTeacherPeriodsForDay(teacherId, day) {
+            const result = [];
+            getClassKeys().forEach(key => {
+                getAllPeriodKeys().forEach(p => {
+                    const val = getCellValue(key, day, p);
+                    if (val.teacher === teacherId) {
+                        result.push({ classKey: key, period: p, subject: val.subject });
+                    }
+                });
+            });
+            result.sort((a, b) => (parseInt(a.period.slice(1), 10) - parseInt(b.period.slice(1), 10)) ||
+                a.classKey.localeCompare(b.classKey));
+            return result;
+        }
+
+        function substIsTeacherFreeAt(teacherId, day, period, excludeClassKey) {
+            return !getClassKeys().some(key => {
+                if (key === excludeClassKey) return false;
+                return getCellValue(key, day, period).teacher === teacherId;
+            });
+        }
+
+        function substWouldConflict(teacherId, day, period, excludeClassKey) {
+            if (!teacherId) return false;
+            return !substIsTeacherFreeAt(teacherId, day, period, excludeClassKey);
+        }
+
+        // Shared: export a full one-week timetable view for the affected classes,
+        // with each changed cell annotated in place. changeNotes: [{classKey, day, period, note}]
+        function exportWeeklyChangesCSV(filename, changeNotes) {
+            if (!changeNotes || changeNotes.length === 0) { showToast('Nothing to export', 'error'); return; }
+            const noteMap = {};
+            changeNotes.forEach(c => { noteMap[c.classKey + '|' + c.day + '|' + c.period] = c.note; });
+            const classKeys = [...new Set(changeNotes.map(c => c.classKey))].sort();
+            const periodKeys = getAllPeriodKeys();
+            const lines = [];
+            classKeys.forEach(ck => {
+                lines.push(['Class', ck]);
+                lines.push(['Day', ...periodKeys]);
+                DAYS.forEach(d => {
+                    const row = [d];
+                    periodKeys.forEach(p => {
+                        const val = getCellValue(ck, d, p);
+                        let cellText = (val.subject && val.teacher) ?
+                            (getSubjectName(val.subject) + ' (' + getTeacherName(val.teacher) + ')') : '';
+                        const note = noteMap[ck + '|' + d + '|' + p];
+                        if (note) cellText = '>>> ' + (cellText || '(empty)') + ' [' + note + ']';
+                        row.push(cellText);
+                    });
+                    lines.push(row);
+                });
+                lines.push([]);
+            });
+            downloadCSVRaw(filename, lines);
+            showToast('Weekly changes CSV exported');
+        }
+
+        // ─────────────────────────────────────────────────────────────
+        // MODAL A — TEACHER SUB (absence handling, draft + export only)
+        // ─────────────────────────────────────────────────────────────
+        let teacherSubState = { day: 'Monday', absentIds: [], subs: {} };
+
+        function openTeacherSubModal() {
+            teacherSubState = { day: teacherSubState.day || 'Monday', absentIds: [], subs: {} };
+            renderTeacherSubModal();
+        }
+
+        function renderTeacherSubModal() {
+            const teacherIds = Object.keys(appData.teachers).sort((a, b) =>
+                (appData.teachers[a].name || '').localeCompare(appData.teachers[b].name || ''));
+            const html = `
+                        <h3>🧑‍🏫 Teacher Sub <span class="badge">draft</span></h3>
+                        <p style="font-size:10.5px;color:#475569;margin:2px 0 8px;">Mark absent teacher(s), auto-find free substitutes, then pick from the dropdowns below. Nothing changes until you click Apply — Export always gives a one-week CSV view regardless.</p>
+                        <div class="form-row">
+                            <div>
+                                <label>Day</label>
+                                <select id="tsDay" onchange="onTeacherSubDayChange()">
+                                    ${DAYS.map(d => `<option value="${d}" ${d === teacherSubState.day ? 'selected' : ''}>${d}</option>`).join('')}
+                                </select>
+                            </div>
+                        </div>
+                        <div style="margin-top:8px;">
+                            <label style="display:block;font-weight:600;font-size:11px;color:#334155;margin-bottom:4px;">Absent Teacher(s)</label>
+                            <div class="subst-teacher-list">
+                                ${teacherIds.length === 0 ? '<div class="empty-msg">No teachers added yet.</div>' : teacherIds.map(id => `
+                                    <label class="subst-check-item">
+                                        <input type="checkbox" value="${id}" ${teacherSubState.absentIds.includes(id) ? 'checked' : ''} onchange="onAbsentToggle('${id}', this.checked)" />
+                                        <span>${appData.teachers[id].name} (${id})</span>
+                                    </label>
+                                `).join('')}
+                            </div>
+                        </div>
+                        <div style="margin-top:12px;" id="tsCoverageWrap">${renderTeacherSubCoverage()}</div>
+                        <div style="margin-top:12px;" id="tsPreviewWrap">${renderTeacherSubPreview()}</div>
+                        <div class="btn-row" style="justify-content:space-between;">
+                            <button class="btn-secondary" onclick="closeModal()">Close</button>
+                            <div style="display:flex;gap:8px;">
+                                <button class="btn-primary" onclick="applyTeacherSubChanges()">✅ Apply</button>
+                                <button class="btn-primary" onclick="exportTeacherSubCSV()">⬇️ Export</button>
+                            </div>
+                        </div>
+                    `;
+            openModal(html, 'modal-lg');
+        }
+
+        function onTeacherSubDayChange() {
+            teacherSubState.day = document.getElementById('tsDay').value;
+            teacherSubState.subs = {};
+            renderTeacherSubModal();
+        }
+
+        function onAbsentToggle(id, checked) {
+            if (checked) {
+                if (!teacherSubState.absentIds.includes(id)) teacherSubState.absentIds.push(id);
+            } else {
+                teacherSubState.absentIds = teacherSubState.absentIds.filter(x => x !== id);
+            }
+            teacherSubState.subs = {};
+            renderTeacherSubModal();
+        }
+
+        function substGetCoverageSlots() {
+            let slots = [];
+            teacherSubState.absentIds.forEach(tId => {
+                substGetTeacherPeriodsForDay(tId, teacherSubState.day).forEach(slot => {
+                    slots.push(Object.assign({ absentTeacher: tId }, slot));
+                });
+            });
+            slots.sort((a, b) => (parseInt(a.period.slice(1), 10) - parseInt(b.period.slice(1), 10)) ||
+                a.classKey.localeCompare(b.classKey));
+            return slots;
+        }
+
+        function renderTeacherSubCoverage() {
+            if (teacherSubState.absentIds.length === 0) {
+                return '<div class="empty-msg">Select at least one absent teacher above.</div>';
+            }
+            const slots = substGetCoverageSlots();
+            if (slots.length === 0) {
+                return '<div class="empty-msg">Selected teacher(s) have no classes on this day.</div>';
+            }
+            let html = `<label style="display:block;font-weight:600;font-size:11px;color:#334155;margin-bottom:4px;">Coverage Needed (${slots.length})</label>
+                        <div class="subst-table-wrap"><table class="subst-table">
+                        <thead><tr><th>Period</th><th>Class</th><th>Subject</th><th>Absent</th><th>Substitute</th></tr></thead><tbody>`;
+            slots.forEach(s => {
+                const slotKey = s.classKey + '|' + s.period;
+                const available = Object.keys(appData.teachers).filter(id =>
+                    !teacherSubState.absentIds.includes(id) && substIsTeacherFreeAt(id, teacherSubState.day, s.period, null)
+                ).sort((a, b) => appData.teachers[a].name.localeCompare(appData.teachers[b].name));
+                const current = teacherSubState.subs[slotKey] || '';
+                html += `<tr>
+                            <td>${s.period}</td>
+                            <td>${s.classKey}</td>
+                            <td>${getSubjectName(s.subject)}</td>
+                            <td>${getTeacherName(s.absentTeacher)}</td>
+                            <td>
+                                <select onchange="onSubChange('${slotKey}', this.value)">
+                                    <option value="">— none —</option>
+                                    ${available.map(id => `<option value="${id}" ${id === current ? 'selected' : ''}>${appData.teachers[id].name}</option>`).join('')}
+                                </select>
+                                ${available.length === 0 ? '<div style="color:#dc2626;font-size:9px;">No free teacher</div>' : ''}
+                            </td>
+                        </tr>`;
+            });
+            html += '</tbody></table></div>';
+            return html;
+        }
+
+        function onSubChange(slotKey, teacherId) {
+            if (teacherId) teacherSubState.subs[slotKey] = teacherId;
+            else delete teacherSubState.subs[slotKey];
+            const wrap = document.getElementById('tsPreviewWrap');
+            if (wrap) wrap.innerHTML = renderTeacherSubPreview();
+        }
+
+        function renderTeacherSubPreview() {
+            const slots = substGetCoverageSlots();
+            if (slots.length === 0) return '';
+            const day = teacherSubState.day;
+            const affectedClasses = [...new Set(slots.map(s => s.classKey))].sort();
+            const periodKeys = getAllPeriodKeys();
+            let html = `<label style="display:block;font-weight:600;font-size:11px;color:#334155;margin-bottom:4px;">Draft Preview — ${day}</label>
+                        <div class="subst-table-wrap"><table class="subst-table subst-preview">
+                        <thead><tr><th>Class</th>${periodKeys.map(p => `<th>${p}</th>`).join('')}</tr></thead><tbody>`;
+            affectedClasses.forEach(key => {
+                html += `<tr><td>${key}</td>`;
+                periodKeys.forEach(p => {
+                    const val = getCellValue(key, day, p);
+                    const slotKey = key + '|' + p;
+                    const subId = teacherSubState.subs[slotKey];
+                    const isAffected = slots.some(s => s.classKey === key && s.period === p);
+                    if (isAffected) {
+                        const origName = getTeacherName(val.teacher);
+                        if (subId) {
+                            html += `<td class="subst-cell subst-changed">${getSubjectName(val.subject)}<br><span class="strike">${origName}</span><br>→ ${getTeacherName(subId)}</td>`;
+                        } else {
+                            html += `<td class="subst-cell subst-warn">${getSubjectName(val.subject)}<br><span class="strike">${origName}</span><br>⚠ unfilled</td>`;
+                        }
+                    } else if (val.subject && val.teacher) {
+                        html += `<td class="subst-cell">${getSubjectMinimal(val.subject)}/${getTeacherMinimal(val.teacher)}</td>`;
+                    } else {
+                        html += `<td class="subst-cell subst-empty">–</td>`;
+                    }
+                });
+                html += '</tr>';
+            });
+            html += '</tbody></table></div>';
+            return html;
+        }
+
+        function applyTeacherSubChanges() {
+            const slots = substGetCoverageSlots();
+            const assigned = slots.filter(s => teacherSubState.subs[s.classKey + '|' + s.period]);
+            if (assigned.length === 0) { showToast('Choose at least one substitute before applying', 'error'); return; }
+            if (!confirm(`Apply ${assigned.length} substitution(s) to the saved timetable for ${teacherSubState.day}?`)) return;
+            beginTransaction();
+            assigned.forEach(s => {
+                const subId = teacherSubState.subs[s.classKey + '|' + s.period];
+                setCellValue(s.classKey, teacherSubState.day, s.period, s.subject, subId);
+                markSubstituted(s.classKey, teacherSubState.day, s.period);
+            });
+            endTransaction();
+            render();
+            saveData();
+            showToast(`Applied ${assigned.length} substitution(s) — shown in blue on the dashboard`);
+            renderTeacherSubModal();
+        }
+
+        function exportTeacherSubCSV() {
+            const slots = substGetCoverageSlots();
+            if (slots.length === 0) { showToast('Nothing to export', 'error'); return; }
+            if (!window.jspdf) { showToast('PDF library failed to load', 'error'); return; }
+            const { jsPDF } = window.jspdf;
+            const doc = new jsPDF({ orientation: 'landscape', unit: 'mm', format: 'a4' });
+            const day = teacherSubState.day;
+            doc.setFontSize(13);
+            doc.setFont(undefined, 'bold');
+            doc.text('Teacher Substitution — ' + day, 14, 12);
+
+            // Build the substitution summary table
+            const substHead = [['Period', 'Class', 'Subject', 'Absent Teacher', 'Substitute', 'Status']];
+            const substBody = slots.map(s => {
+                const slotKey = s.classKey + '|' + s.period;
+                const subId = teacherSubState.subs[slotKey] || '';
+                return [
+                    s.period,
+                    s.classKey,
+                    getSubjectName(s.subject),
+                    getTeacherName(s.absentTeacher),
+                    subId ? getTeacherName(subId) : '—',
+                    subId ? 'Covered' : 'Unfilled'
+                ];
+            });
+
+            doc.autoTable({
+                head: substHead,
+                body: substBody,
+                startY: 16,
+                styles: { fontSize: 8, cellPadding: 2, halign: 'center', valign: 'middle', lineColor: [203, 213, 225], lineWidth: 0.1 },
+                headStyles: { fillColor: [37, 99, 235], textColor: 255, fontStyle: 'bold' },
+                columnStyles: { 4: { fontStyle: 'bold' } },
+                margin: { left: 10, right: 10 },
+                didParseCell: function(data) {
+                    if (data.section === 'body' && data.column.index === 5) {
+                        if (data.cell.raw === 'Covered') {
+                            data.cell.styles.fillColor = [220, 252, 231];
+                            data.cell.styles.textColor = [22, 101, 52];
+                            data.cell.styles.fontStyle = 'bold';
+                        } else if (data.cell.raw === 'Unfilled') {
+                            data.cell.styles.fillColor = [254, 226, 226];
+                            data.cell.styles.textColor = [153, 27, 27];
+                            data.cell.styles.fontStyle = 'bold';
+                        }
+                    }
+                }
+            });
+
+            // Weekly timetable view for affected classes showing changes
+            const affectedClassKeys = [...new Set(slots.map(s => s.classKey))].sort();
+            const noteMap = {};
+            slots.forEach(s => {
+                const slotKey = s.classKey + '|' + s.period;
+                const subId = teacherSubState.subs[slotKey] || '';
+                noteMap[s.classKey + '|' + day + '|' + s.period] = subId ?
+                    (getTeacherName(s.absentTeacher) + ' → ' + getTeacherName(subId)) :
+                    (getTeacherName(s.absentTeacher) + ' (unfilled)');
+            });
+
+            const periodKeys = getAllPeriodKeys();
+            const head = [buildPeriodHead()];
+
+            affectedClassKeys.forEach(ck => {
+                doc.addPage();
+                doc.setFontSize(11);
+                doc.setFont(undefined, 'bold');
+                doc.text('Class: ' + ck + ' — Substitution Preview (' + day + ')', 14, 12);
+
+                const body = DAYS.map(d => {
+                    const row = [d];
+                    periodKeys.forEach(p => {
+                        const val = getCellValue(ck, d, p);
+                        let cellText = formatClassCell(val);
+                        const pNum = parseInt(p.replace('P', ''), 10);
+                        getBreaksAfterPeriod(pNum).forEach(b => row.push(b.name));
+                        if (d === day && noteMap[ck + '|' + d + '|' + p]) {
+                            cellText = cellText + '\n[' + noteMap[ck + '|' + d + '|' + p] + ']';
+                        }
+                        row.push(cellText);
+                    });
+                    return row;
+                });
+
+                doc.autoTable({
+                    head,
+                    body,
+                    startY: 16,
+                    styles: { fontSize: 7, cellPadding: 1.5, halign: 'center', valign: 'middle', lineColor: [203, 213, 225], lineWidth: 0.1 },
+                    headStyles: { fillColor: [37, 99, 235], textColor: 255, fontStyle: 'bold', fontSize: 7 },
+                    columnStyles: { 0: { fontStyle: 'bold', fillColor: [241, 245, 249], cellWidth: 26 } },
+                    margin: { left: 10, right: 10 },
+                    didParseCell: function(data) {
+                        if (data.section === 'body' && isBreakCellText(data.cell.raw)) {
+                            data.cell.styles.fillColor = [254, 243, 199];
+                            data.cell.styles.textColor = [146, 64, 14];
+                            data.cell.styles.fontStyle = 'bold';
+                        } else if (data.section === 'body' && data.column.index > 0) {
+                            const note = noteMap[ck + '|' + DAYS[data.row.index] + '|' + periodKeys[data.column.index - 1]];
+                            if (note) {
+                                data.cell.styles.fillColor = [254, 243, 199];
+                                data.cell.styles.textColor = [92, 40, 4];
+                                data.cell.styles.fontStyle = 'bold';
+                            }
+                        } else if (data.section === 'head' && isBreakCellText(data.cell.raw)) {
+                            data.cell.styles.fillColor = [251, 191, 36];
+                            data.cell.styles.textColor = [92, 40, 4];
+                        }
+                    }
+                });
+            });
+
+            doc.save('teacher_substitution_' + day + '.pdf');
+            showToast('Substitution PDF downloaded');
+        }
+
+        // ─────────────────────────────────────────────────────────────
+        // MODAL B — CLASS SUB (Exchange / Borrow, applies immediately)
+        // ─────────────────────────────────────────────────────────────
+        let classExState = { day: 'Monday', teacherA: '', teacherB: '', changes: [] };
+
+        function openClassExchangeModal() {
+            classExState = { day: classExState.day || 'Monday', teacherA: '', teacherB: '', changes: [] };
+            renderClassExchangeModal();
+        }
+
+        function renderClassExchangeModal() {
+            const teacherIds = Object.keys(appData.teachers).sort((a, b) =>
+                (appData.teachers[a].name || '').localeCompare(appData.teachers[b].name || ''));
+            const periodsA = classExState.teacherA ? substGetTeacherPeriodsForDay(classExState.teacherA, classExState.day) : [];
+            const periodsB = classExState.teacherB ? substGetTeacherPeriodsForDay(classExState.teacherB, classExState.day) : [];
+            const html = `
+                        <h3>🔄 Class Sub — Exchange / Borrow</h3>
+                        <p style="font-size:10.5px;color:#475569;margin:2px 0 8px;">Exchange or Borrow apply straight to the saved timetable (conflicts are flagged before applying).</p>
+                        <div class="form-row">
+                            <div>
+                                <label>Day</label>
+                                <select id="ceDay" onchange="onClassExDayChange()">
+                                    ${DAYS.map(d => `<option value="${d}" ${d === classExState.day ? 'selected' : ''}>${d}</option>`).join('')}
+                                </select>
+                            </div>
+                            <div>
+                                <label>Teacher A (Requesting)</label>
+                                <select id="ceTeacherA" onchange="onClassExTeacherChange('A', this.value)">
+                                    <option value="">— select —</option>
+                                    ${teacherIds.map(id => `<option value="${id}" ${id === classExState.teacherA ? 'selected' : ''}>${appData.teachers[id].name}</option>`).join('')}
+                                </select>
+                            </div>
+                            <div>
+                                <label>Teacher B (Target)</label>
+                                <select id="ceTeacherB" onchange="onClassExTeacherChange('B', this.value)">
+                                    <option value="">— select —</option>
+                                    ${teacherIds.map(id => `<option value="${id}" ${id === classExState.teacherB ? 'selected' : ''}>${appData.teachers[id].name}</option>`).join('')}
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-row" style="margin-top:8px;">
+                            <div>
+                                <label>Teacher A's Period</label>
+                                <select id="cePeriodA">
+                                    <option value="">— select —</option>
+                                    ${periodsA.map(s => `<option value="${s.classKey}|${s.period}">${s.period} — ${s.classKey} (${getSubjectName(s.subject)})</option>`).join('')}
+                                </select>
+                            </div>
+                            <div>
+                                <label>Teacher B's Period</label>
+                                <select id="cePeriodB">
+                                    <option value="">— select —</option>
+                                    ${periodsB.map(s => `<option value="${s.classKey}|${s.period}">${s.period} — ${s.classKey} (${getSubjectName(s.subject)})</option>`).join('')}
+                                </select>
+                            </div>
+                        </div>
+                        <div class="btn-row" style="justify-content:flex-start;gap:8px;margin-top:10px;">
+                            <button class="btn-primary" onclick="doClassExchangeAction('exchange')">⇄ Exchange</button>
+                            <button class="btn-primary" onclick="doClassExchangeAction('borrow')">➜ Borrow</button>
+                        </div>
+                        <div style="margin-top:14px;" id="ceChangesWrap">${renderClassExchangeLog()}</div>
+                        <div class="btn-row" style="justify-content:space-between;margin-top:10px;">
+                            <button class="btn-secondary" onclick="closeModal()">Close</button>
+                            <button class="btn-primary" onclick="exportClassExchangeCSV()">⬇️ Export</button>
+                        </div>
+                    `;
+            openModal(html, 'modal-lg');
+        }
+
+        function onClassExDayChange() {
+            classExState.day = document.getElementById('ceDay').value;
+            renderClassExchangeModal();
+        }
+
+        function onClassExTeacherChange(who, val) {
+            if (who === 'A') classExState.teacherA = val; else classExState.teacherB = val;
+            renderClassExchangeModal();
+        }
+
+        function doClassExchangeAction(type) {
+            const pAraw = document.getElementById('cePeriodA').value;
+            const pBraw = document.getElementById('cePeriodB').value;
+            const day = classExState.day;
+
+            if (type === 'exchange') {
+                if (!pAraw || !pBraw) { showToast('Select a period for both teachers', 'error'); return; }
+                const [classA, periodA] = pAraw.split('|');
+                const [classB, periodB] = pBraw.split('|');
+                const valA = Object.assign({}, getCellValue(classA, day, periodA));
+                const valB = Object.assign({}, getCellValue(classB, day, periodB));
+                if (substWouldConflict(valB.teacher, day, periodA, classA) &&
+                    !confirm(`${getTeacherName(valB.teacher)} already has a class at ${periodA} on ${day}. Proceed anyway?`)) return;
+                if (substWouldConflict(valA.teacher, day, periodB, classB) &&
+                    !confirm(`${getTeacherName(valA.teacher)} already has a class at ${periodB} on ${day}. Proceed anyway?`)) return;
+                beginTransaction();
+                setCellValue(classA, day, periodA, valB.subject, valB.teacher);
+                setCellValue(classB, day, periodB, valA.subject, valA.teacher);
+                endTransaction();
+                markSubstituted(classA, day, periodA);
+                markSubstituted(classB, day, periodB);
+                classExState.changes.push({ day, classKey: classA, period: periodA, before: valA, after: valB, type: 'exchange' });
+                classExState.changes.push({ day, classKey: classB, period: periodB, before: valB, after: valA, type: 'exchange' });
+                showToast('Periods exchanged');
+            } else {
+                if (!pBraw) { showToast("Select Teacher B's period to borrow", 'error'); return; }
+                if (!classExState.teacherA) { showToast('Select Teacher A', 'error'); return; }
+                const [classB, periodB] = pBraw.split('|');
+                const valB = Object.assign({}, getCellValue(classB, day, periodB));
+                if (substWouldConflict(classExState.teacherA, day, periodB, classB) &&
+                    !confirm(`${getTeacherName(classExState.teacherA)} already has a class at ${periodB} on ${day}. Proceed anyway?`)) return;
+                beginTransaction();
+                setCellValue(classB, day, periodB, valB.subject, classExState.teacherA);
+                endTransaction();
+                markSubstituted(classB, day, periodB);
+                classExState.changes.push({
+                    day, classKey: classB, period: periodB, before: valB,
+                    after: { subject: valB.subject, teacher: classExState.teacherA }, type: 'borrow'
+                });
+                showToast('Period borrowed');
+            }
+            render();
+            saveData();
+            renderClassExchangeModal();
+        }
+
+        function renderClassExchangeLog() {
+            if (classExState.changes.length === 0) {
+                return '<div class="empty-msg">No changes yet. Choose periods above and click Exchange or Borrow.</div>';
+            }
+            let html = `<label style="display:block;font-weight:600;font-size:11px;color:#334155;margin-bottom:4px;">Applied Changes (${classExState.changes.length})</label>
+                        <div class="subst-table-wrap"><table class="subst-table">
+                        <thead><tr><th>Type</th><th>Day</th><th>Period</th><th>Class</th><th>Before</th><th>After</th></tr></thead><tbody>`;
+            classExState.changes.forEach(c => {
+                const beforeText = c.before.subject ? `${getSubjectName(c.before.subject)} / ${getTeacherName(c.before.teacher)}` : '—';
+                const afterText = c.after.subject ? `${getSubjectName(c.after.subject)} / ${getTeacherName(c.after.teacher)}` : '—';
+                html += `<tr><td>${c.type}</td><td>${c.day}</td><td>${c.period}</td><td>${c.classKey}</td><td>${beforeText}</td><td>${afterText}</td></tr>`;
+            });
+            html += '</tbody></table></div>';
+            return html;
+        }
+
+        function exportClassExchangeCSV() {
+            if (classExState.changes.length === 0) { showToast('No changes to export', 'error'); return; }
+            const changeNotes = classExState.changes.map(c => {
+                const note = c.type.toUpperCase() + ': ' +
+                    (c.before.teacher ? getTeacherName(c.before.teacher) : '—') + ' \u2192 ' +
+                    (c.after.teacher ? getTeacherName(c.after.teacher) : '—');
+                return { classKey: c.classKey, day: c.day, period: c.period, note };
+            });
+            exportWeeklyChangesCSV('class_exchange_week_' + Date.now() + '.csv', changeNotes);
+        }
+
+        // ─────────────────────────────────────────────────────────────
+        // MODAL C — EVENT (period blocking, applies immediately)
+        // ─────────────────────────────────────────────────────────────
+        let eventState = { name: '', dayFrom: 'Monday', dayTo: 'Monday', periods: [], classKeys: [], applyToAll: true };
+
+        function openEventModal() {
+            eventState = { name: '', dayFrom: 'Monday', dayTo: 'Monday', periods: [], classKeys: [], applyToAll: true };
+            renderEventModal();
+        }
+
+        function renderEventModal() {
+            const periodKeys = getAllPeriodKeys();
+            const classList = getClassList();
+            const html = `
+                        <h3>📌 Event / Block Periods</h3>
+                        <p style="font-size:10.5px;color:#475569;margin:2px 0 8px;">Blocks the chosen slots and overwrites them with the event name — applies immediately to the saved timetable.</p>
+                        <div class="form-row">
+                            <div style="flex:1.5;"><label>Event Name</label><input type="text" id="evName" placeholder="e.g. Sports Day" value="${eventState.name}" /></div>
+                        </div>
+                        <div class="form-row" style="margin-top:8px;">
+                            <div>
+                                <label>From Day</label>
+                                <select id="evDayFrom">
+                                    ${DAYS.map(d => `<option value="${d}" ${d === eventState.dayFrom ? 'selected' : ''}>${d}</option>`).join('')}
+                                </select>
+                            </div>
+                            <div>
+                                <label>To Day</label>
+                                <select id="evDayTo">
+                                    ${DAYS.map(d => `<option value="${d}" ${d === eventState.dayTo ? 'selected' : ''}>${d}</option>`).join('')}
+                                </select>
+                            </div>
+                        </div>
+                        <div style="margin-top:8px;">
+                            <label style="display:block;font-weight:600;font-size:11px;color:#334155;margin-bottom:4px;">Period(s)</label>
+                            <div style="display:flex;gap:8px;flex-wrap:wrap;">
+                                ${periodKeys.map(p => `
+                                    <label class="subst-check-item" style="width:auto;">
+                                        <input type="checkbox" value="${p}" ${eventState.periods.includes(p) ? 'checked' : ''} onchange="onEventPeriodToggle('${p}', this.checked)" />
+                                        <span>${p}</span>
+                                    </label>
+                                `).join('')}
+                            </div>
+                        </div>
+                        <div style="margin-top:10px;">
+                            <label class="subst-check-item" style="width:auto;">
+                                <input type="checkbox" id="evAllClasses" ${eventState.applyToAll ? 'checked' : ''} onchange="onEventAllClassesToggle(this.checked)" />
+                                <span style="font-weight:600;">Apply to all classes</span>
+                            </label>
+                            <div id="evClassListWrap" style="${eventState.applyToAll ? 'display:none;' : ''}margin-top:6px;">
+                                <div class="subst-teacher-list">
+                                    ${classList.map(c => {
+                                        const key = getClassKey(c.class, c.section);
+                                        return `<label class="subst-check-item">
+                                            <input type="checkbox" value="${key}" ${eventState.classKeys.includes(key) ? 'checked' : ''} onchange="onEventClassToggle('${key}', this.checked)" />
+                                            <span>${key}</span>
+                                        </label>`;
+                                    }).join('')}
+                                </div>
+                            </div>
+                        </div>
+                        <div class="btn-row" style="justify-content:space-between;margin-top:12px;">
+                            <button class="btn-secondary" onclick="closeModal()">Cancel</button>
+                            <button class="btn-primary" onclick="applyEventBlock()">✅ Apply Event</button>
+                        </div>
+                    `;
+            openModal(html, 'modal-lg');
+        }
+
+        function onEventPeriodToggle(p, checked) {
+            if (checked) { if (!eventState.periods.includes(p)) eventState.periods.push(p); }
+            else eventState.periods = eventState.periods.filter(x => x !== p);
+        }
+        function onEventAllClassesToggle(checked) {
+            eventState.applyToAll = checked;
+            const wrap = document.getElementById('evClassListWrap');
+            if (wrap) wrap.style.display = checked ? 'none' : 'block';
+        }
+        function onEventClassToggle(key, checked) {
+            if (checked) { if (!eventState.classKeys.includes(key)) eventState.classKeys.push(key); }
+            else eventState.classKeys = eventState.classKeys.filter(x => x !== key);
+        }
+
+        function applyEventBlock() {
+            const name = document.getElementById('evName').value.trim();
+            if (!name) { showToast('Enter an event name', 'error'); return; }
+            const dayFromVal = document.getElementById('evDayFrom').value;
+            const dayToVal = document.getElementById('evDayTo').value;
+            const dayFromIdx = DAYS.indexOf(dayFromVal);
+            const dayToIdx = DAYS.indexOf(dayToVal);
+            if (dayToIdx < dayFromIdx) { showToast('"To Day" must be the same as or after "From Day"', 'error'); return; }
+            const selectedDays = DAYS.slice(dayFromIdx, dayToIdx + 1);
+            if (eventState.periods.length === 0) { showToast('Select at least one period', 'error'); return; }
+            const targetClasses = eventState.applyToAll ? getClassKeys() : eventState.classKeys;
+            if (targetClasses.length === 0) { showToast('Select at least one class', 'error'); return; }
+            const slotCount = targetClasses.length * selectedDays.length * eventState.periods.length;
+            if (!confirm(`This will overwrite ${slotCount} slot(s) with "${name}". Continue?`)) return;
+
+            const code = 'EVT_' + name.toUpperCase().replace(/[^A-Z0-9]/g, '').slice(0, 10) + '_' + Date.now().toString(36).slice(-4);
+            appData.subjects[code] = { name: name, minimalCode: name.replace(/[^A-Za-z]/g, '').slice(0, 2).toUpperCase() || 'EV' };
+            if (!appData.teachers['EVENT']) {
+                appData.teachers['EVENT'] = { name: 'Event', minimalId: 'EV', subjects: [] };
+            }
+
+            beginTransaction();
+            let count = 0;
+            targetClasses.forEach(key => {
+                selectedDays.forEach(d => {
+                    eventState.periods.forEach(p => {
+                        setCellValue(key, d, p, code, 'EVENT');
+                        count++;
+                    });
+                });
+            });
+            endTransaction();
+            closeModal();
+            render();
+            showToast(`Event "${name}" applied to ${count} slot(s)`);
+            saveData();
+        }
 
         // Expose functions to global scope
         window.closeModal = closeModal;
@@ -3295,6 +4345,29 @@
         window.exportCSV = exportCSV;
         window.clearAllData = clearAllData;
         window.render = render;
+        window.toggleSubstMenu = toggleSubstMenu;
+        window.closeSubstMenu = closeSubstMenu;
+        window.openTeacherSubModal = openTeacherSubModal;
+        window.onTeacherSubDayChange = onTeacherSubDayChange;
+        window.onAbsentToggle = onAbsentToggle;
+        window.onSubChange = onSubChange;
+        window.applyTeacherSubChanges = applyTeacherSubChanges;
+        window.exportTeacherSubCSV = exportTeacherSubCSV;
+        window.openClassExchangeModal = openClassExchangeModal;
+        window.onClassExDayChange = onClassExDayChange;
+        window.onClassExTeacherChange = onClassExTeacherChange;
+        window.doClassExchangeAction = doClassExchangeAction;
+        window.exportClassExchangeCSV = exportClassExchangeCSV;
+        window.openEventModal = openEventModal;
+        window.onEventPeriodToggle = onEventPeriodToggle;
+        window.onEventAllClassesToggle = onEventAllClassesToggle;
+        window.onEventClassToggle = onEventClassToggle;
+        window.applyEventBlock = applyEventBlock;
+        window.undo = undo;
+        window.redo = redo;
+        window.pushHistory = pushHistory;
+        window.beginTransaction = beginTransaction;
+        window.endTransaction = endTransaction;
     </script>
 </body>
 </html>
